@@ -6,7 +6,7 @@
   <title>颜色和颜色空间之颜色 | Hut&#39;s left Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="白色代表学术诚实和肉体之爱的纯净；红色代表艺术激情、政治信念、血气之勇；蓝色代表在音乐和数学上的内省发现、医疗助人以及万物的基本结构；翠绿代表和自然共鸣、和技术同乐以及对受威胁生命的保护；黑色代表人类神秘的创作，这是德姆・瑞亚的民族颜色的含义。我喜欢蓝色，你喜欢绿色，人家喜欢黑色，这在日常颜色真的很简单，只需要感性的感受它的美就可以。但当我看到“颜色空间”，进而去想理解颜色的时候，发现我们对颜色的">
-<meta name="keywords" content="颜色">
+<meta name="keywords" content="颜色,Color Space">
 <meta property="og:type" content="article">
 <meta property="og:title" content="颜色和颜色空间之颜色">
 <meta property="og:url" content="http://yoursite.com/2017/08/23/颜色和颜色空间之颜色/index.html">
@@ -21,7 +21,7 @@
 <meta property="og:image" content="http://yoursite.com/2017/08/23/颜色和颜色空间之颜色/Fluorescentlamps.png">
 <meta property="og:image" content="http://yoursite.com/2017/08/23/颜色和颜色空间之颜色/spd.png">
 <meta property="og:image" content="http://yoursite.com/2017/08/23/颜色和颜色空间之颜色/illuminantE.png">
-<meta property="og:updated_time" content="2017-08-23T11:36:42.000Z">
+<meta property="og:updated_time" content="2017-08-23T15:06:26.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="颜色和颜色空间之颜色">
 <meta name="twitter:description" content="白色代表学术诚实和肉体之爱的纯净；红色代表艺术激情、政治信念、血气之勇；蓝色代表在音乐和数学上的内省发现、医疗助人以及万物的基本结构；翠绿代表和自然共鸣、和技术同乐以及对受威胁生命的保护；黑色代表人类神秘的创作，这是德姆・瑞亚的民族颜色的含义。我喜欢蓝色，你喜欢绿色，人家喜欢黑色，这在日常颜色真的很简单，只需要感性的感受它的美就可以。但当我看到“颜色空间”，进而去想理解颜色的时候，发现我们对颜色的">
@@ -100,7 +100,15 @@
     
     <div class="article-entry" itemprop="articleBody">
       
+        <!-- Table of Contents -->
+        
+        <div id="toc" class="toc-article">
+        <strong class="toc-title">文章目录</strong>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#什么是颜色"><span class="toc-number">1.</span> <span class="toc-text">什么是颜色</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#光"><span class="toc-number">1.1.</span> <span class="toc-text">光</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#人的睛眼"><span class="toc-number">1.2.</span> <span class="toc-text">人的睛眼</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#原色以及增减色原理"><span class="toc-number">1.3.</span> <span class="toc-text">原色以及增减色原理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#颜色的亮度"><span class="toc-number">1.4.</span> <span class="toc-text">颜色的亮度</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#光谱功率分布（Spectral-Power-Distribution）"><span class="toc-number">1.5.</span> <span class="toc-text">光谱功率分布（Spectral Power Distribution）</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#物体的SDP"><span class="toc-number">1.5.1.</span> <span class="toc-text">物体的SDP</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#什么是白色？"><span class="toc-number">1.6.</span> <span class="toc-text">什么是白色？</span></a></li></ol></li></ol>
+        </div>
+        
         <p>白色代表学术诚实和肉体之爱的纯净；红色代表艺术激情、政治信念、血气之勇；蓝色代表在音乐和数学上的内省发现、医疗助人以及万物的基本结构；翠绿代表和自然共鸣、和技术同乐以及对受威胁生命的保护；黑色代表人类神秘的创作，这是德姆・瑞亚的民族颜色的含义。我喜欢蓝色，你喜欢绿色，人家喜欢黑色，这在日常颜色真的很简单，只需要感性的感受它的美就可以。但当我看到“颜色空间”，进而去想理解颜色的时候，发现我们对颜色的描述真的是很复杂，涉及到光的物理性质，以及的生理结构等方面。现记下对颜色学习的笔记。</p>
+<a id="more"></a>
 <h2 id="什么是颜色"><a href="#什么是颜色" class="headerlink" title="什么是颜色"></a>什么是颜色</h2><h3 id="光"><a href="#光" class="headerlink" title="光"></a>光</h3><p>我们能看各种颜色的大千世界，一切都始于光。所要明白颜色是什么，我们先得明白光是什么东西。光有粒子性和波动性，但在研究颜色的问题上，都使用光的波动性来研究，即光是一种波，物理学上叫电磁波。由于有不同波长的电磁波，就产生不同颜色的光，比如蓝色光中光波的波长比红色光中光波的波长短些。<br>光波的波长用希腊字母 λ 表示，可见光的波长大概时380-740纳米，大于740纳米和小于380纳米的光波人类的眼睛就看不到了，比如紫外线或红外线，但有些动物的眼睛可以感知到。人类可见光谱如下：<br><img src="/2017/08/23/颜色和颜色空间之颜色/spectrum1.png" alt="可见光谱图" title="可见光谱图"><br>白光是由所有可见光颜色组合而成的（牛顿使棱镜实验），所以拿可见光谱中所有的光，并按合适的比例进行混合就可造出白光。</p>
 <h3 id="人的睛眼"><a href="#人的睛眼" class="headerlink" title="人的睛眼"></a>人的睛眼</h3><p>人的睛眼视网膜上有两类主要的光感细胞，视锥细胞 和 视杆细胞。</p>
 <p><strong><a href="https://zh.wikipedia.org/wiki/视锥细胞" target="_blank" rel="external">视锥细胞（cone cell ）</a></strong>：主要分布在视网膜中心，视锥细胞主要负责颜色识别，并且在相对较亮的光照下更能发挥作用。</p>
@@ -108,19 +116,17 @@
 <p>视锥细胞有三种（亲红，亲绿，亲蓝视色素），而且每一种都对特定的可见光范围敏感。这三种视锥细胞刚好大约分别对红色，绿色，和蓝色最为敏感，而这三种颜色也是计算机显示器构造颜色的三原色。所以说视锥细胞负责颜色识别（或者叫三原色识别）。</p>
 <h3 id="原色以及增减色原理"><a href="#原色以及增减色原理" class="headerlink" title="原色以及增减色原理"></a>原色以及增减色原理</h3><p><strong>原色有两种定义：</strong></p>
 <p><strong>1. 红色，绿色，蓝色。</strong>增色法中的原色，计算机或照明行业使用方法。</p>
-<blockquote>
-<p>因为上面提到的生理的原因（视锥细胞对红色，绿色，和蓝色最为敏感），因此使用红，绿，蓝作为三原色,这三种颜色是相互独立的，任何一种都不能使用其它二种颜色混合。使用此三原色按比例混合成其它的颜色。</p>
+<blockquote><p>因为上面提到的生理的原因（视锥细胞对红色，绿色，和蓝色最为敏感），因此使用红，绿，蓝作为三原色,这三种颜色是相互独立的，任何一种都不能使用其它二种颜色混合。使用此三原色按比例混合成其它的颜色。</p>
 <p>红色+绿色=黄色</p>
 <p>绿色+蓝色=青色</p>
 <p>红色+蓝色=品红</p>
 <p>红色+绿色+蓝色=白色</p>
 <p>黄色、青色、品红都是由两种及色相混合而成，所以它们又称相加二次色。</p>
-<img src="/2017/08/23/颜色和颜色空间之颜色/Additive.png" alt="增色法图" title="增色法图">
 </blockquote>
+<img src="/2017/08/23/颜色和颜色空间之颜色/Additive.png" alt="增色法图" title="增色法图">
 <p><strong>2. 黄色，品红，青色。</strong>减色法中的原色，绘画艺术方面使用此方法。</p>
-<blockquote>
-<p>在白光照射下，青色颜料能吸收红色而反射青色，黄色颜料吸收蓝色而反射黄色，品红颜料吸收绿色而反射品红<br>如下图黄色的产生。白光（红+绿+蓝）照射黄色颜料，其中的蓝色光成份被吸收，反射回红和绿色成份的光，而红色光加绿色光我们的眼睛即感知为黄色。</p>
-<img src="/2017/08/23/颜色和颜色空间之颜色/yellow.png" alt="减色法黄色的产生" title="减色法黄色的产生">
+<blockquote><p>在白光照射下，青色颜料能吸收红色而反射青色，黄色颜料吸收蓝色而反射黄色，品红颜料吸收绿色而反射品红<br>如下图黄色的产生。白光（红+绿+蓝）照射黄色颜料，其中的蓝色光成份被吸收，反射回红和绿色成份的光，而红色光加绿色光我们的眼睛即感知为黄色。</p>
+<p><img src="/2017/08/23/颜色和颜色空间之颜色/yellow.png" alt="减色法黄色的产生" title="减色法黄色的产生"></p>
 <p>白色-红色=青色</p>
 <p>白色-绿色=品红</p>
 <p>白色-蓝色=黄色</p>
@@ -128,8 +134,8 @@
 <p>颜料(黄色+青色)=白色-红色-蓝色=绿色</p>
 <p>颜料(品红+青色)=白色-红色-绿色=蓝色</p>
 <p>颜料(黄色+品红)=白色-绿色-蓝色=红色</p>
-<img src="/2017/08/23/颜色和颜色空间之颜色/Subtractive.png" alt="减色法图" title="减色法图">
 </blockquote>
+<img src="/2017/08/23/颜色和颜色空间之颜色/Subtractive.png" alt="减色法图" title="减色法图">
 <p>资料:</p>
 <p><a href="https://zh.wikipedia.org/wiki/三原色光模式#RGB.E9.A2.9C.E8.89.B2.E6.A8.A1.E5.9E.8B.E7.90.86.E8.AE.BA.E4.B8.8E.E5.BA.94.E7.94.A8.E7.9A.84.E5.8E.86.E5.8F.B2" target="_blank" rel="external">三原色光模式</a></p>
 <p><a href="http://www.ebaomonthly.com/window/photo/lesson/color_01.htm" target="_blank" rel="external">色彩原理</a></p>
@@ -149,8 +155,7 @@
 <h4 id="物体的SDP"><a href="#物体的SDP" class="headerlink" title="物体的SDP"></a>物体的SDP</h4><p>不仅是发光物体有独有颜色光谱曲线，不会发光的物体也有独一无二的光谱反射率曲线(spectral reflectance curve)。因为不发光的物体不发光，它会吸收部分照射它的光，并反射回未吸收的那部分，这部也会被我们看到。每一个物体都有其特别的光谱反射率曲线。如下为A（黄油），B(西红柿)，C（大白菜）的光谱反射率曲线：</p>
 <img src="/2017/08/23/颜色和颜色空间之颜色/spd.png" alt="光谱反射率曲线" title="光谱反射率曲线">
 <p>国际照明委员会也定义了一个非常有用的标准 <strong>显色指数（Color Rendering Index）</strong>：光源对物体的显色能力称为显色性，是通过与同色温的参考或基准光源（白炽灯或画光）下物体外观颜色的比较。</p>
-<blockquote>
-<p>色温<br>色温有时候会用来描述颜色，就像我们会蓝色比黄色冷。这个名词原本描述的现象是，当一个物体的温度达到一定值会发出可见光，而这可见光的颜色取决于这个物体温度的大小。这个现象叫黑体辐射。太阳可看成一个黑体，它的温度大概是5700K。</p>
+<blockquote><p>色温<br>色温有时候会用来描述颜色，就像我们会蓝色比黄色冷。这个名词原本描述的现象是，当一个物体的温度达到一定值会发出可见光，而这可见光的颜色取决于这个物体温度的大小。这个现象叫黑体辐射。太阳可看成一个黑体，它的温度大概是5700K。</p>
 </blockquote>
 <h3 id="什么是白色？"><a href="#什么是白色？" class="headerlink" title="什么是白色？"></a>什么是白色？</h3><p>当可见光谱中所有成份的光都等量时，就是标准的白色。这种光源在现实之中是不存在的，那的光谱图叫<strong>E标准光源(E illuminant)</strong>,对应ICE标准光源中的E光源。</p>
 <img src="/2017/08/23/颜色和颜色空间之颜色/illuminantE.png" alt="illuminantE.png" title="">
@@ -161,10 +166,10 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/08/23/颜色和颜色空间之颜色/" data-id="cj6oy3qz400031razy85lwocw" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2017/08/23/颜色和颜色空间之颜色/" data-id="cj6p3tib50004llazknuvj6qo" class="article-share-link">Share</a>
       
       
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/颜色/">颜色</a></li></ul>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Color-Space/">Color Space</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/颜色/">颜色</a></li></ul>
 
     </footer>
   </div>
@@ -183,6 +188,7 @@
   
 </article>
 
+
 </section>
         
           <aside id="sidebar">
@@ -194,7 +200,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tags</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/ssh/">ssh</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/颜色/">颜色</a></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Color-Space/">Color Space</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ssh/">ssh</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/颜色/">颜色</a></li></ul>
     </div>
   </div>
 
@@ -204,7 +210,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/ssh/" style="font-size: 10px;">ssh</a> <a href="/tags/颜色/" style="font-size: 10px;">颜色</a>
+      <a href="/tags/Color-Space/" style="font-size: 10px;">Color Space</a> <a href="/tags/ssh/" style="font-size: 10px;">ssh</a> <a href="/tags/颜色/" style="font-size: 10px;">颜色</a>
     </div>
   </div>
 
@@ -231,10 +237,6 @@
         
           <li>
             <a href="/2017/08/15/SSH远程登录和SCP远程文件传输/">SSH远程登录和SCP远程文件传输</a>
-          </li>
-        
-          <li>
-            <a href="/2017/08/14/hello-world/">Welcome to Meadow</a>
           </li>
         
       </ul>
