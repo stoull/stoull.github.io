@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Vim 中使用查找和替换 | Hut&#39;s left Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="查找在normal模式下按下/即可进入查找模式，输入要查找的字符串并按下回车。 Vim会跳转到第一个匹配。按下n查找下一个，按下N查找上一个。 Vim查找支持正则表达式，例如/vim$匹配行尾的”vim”。 需要查找特殊字符需要转义，例如/vim\$匹配”vim$”。">
+<meta name="keywords" content="vim">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Vim 中使用查找和替换">
+<meta property="og:url" content="http://yoursite.com/2017/08/24/Linux/Vim/Vim中使用查找和替换/index.html">
+<meta property="og:site_name" content="Hut&#39;s left Blog">
+<meta property="og:description" content="查找在normal模式下按下/即可进入查找模式，输入要查找的字符串并按下回车。 Vim会跳转到第一个匹配。按下n查找下一个，按下N查找上一个。 Vim查找支持正则表达式，例如/vim$匹配行尾的”vim”。 需要查找特殊字符需要转义，例如/vim\$匹配”vim$”。">
+<meta property="og:updated_time" content="2017-08-24T09:50:55.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Vim 中使用查找和替换">
+<meta name="twitter:description" content="查找在normal模式下按下/即可进入查找模式，输入要查找的字符串并按下回车。 Vim会跳转到第一个匹配。按下n查找下一个，按下N查找上一个。 Vim查找支持正则表达式，例如/vim$匹配行尾的”vim”。 需要查找特殊字符需要转义，例如/vim\$匹配”vim$”。">
+  
+    <link rel="alternate" href="/atom.xml" title="Hut&#39;s left Blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hut&#39;s left Blog</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">Symphony No.9 in E minor</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-Linux/Vim/Vim中使用查找和替换" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/08/24/Linux/Vim/Vim中使用查找和替换/" class="article-date">
+  <time datetime="2017-08-24T09:43:00.000Z" itemprop="datePublished">2017-08-24</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Vim 中使用查找和替换
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <!-- Table of Contents -->
+        
+        <div id="toc" class="toc-article">
+        <strong class="toc-title">文章目录</strong>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#查找"><span class="toc-number">1.</span> <span class="toc-text">查找</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#大小写敏感查找"><span class="toc-number">1.1.</span> <span class="toc-text">大小写敏感查找</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#大小写敏感配置"><span class="toc-number">1.2.</span> <span class="toc-text">大小写敏感配置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#查找当前单词"><span class="toc-number">1.3.</span> <span class="toc-text">查找当前单词</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#查找与替换"><span class="toc-number">2.</span> <span class="toc-text">查找与替换</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#作用范围"><span class="toc-number">2.1.</span> <span class="toc-text">作用范围</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#替换标志"><span class="toc-number">2.2.</span> <span class="toc-text">替换标志</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#转义字符"><span class="toc-number">3.</span> <span class="toc-text">转义字符</span></a></li></ol>
+        </div>
+        
+        <h2 id="查找"><a href="#查找" class="headerlink" title="查找"></a>查找</h2><p>在normal模式下按下<code>/</code>即可进入查找模式，输入要查找的字符串并按下回车。 Vim会跳转到第一个匹配。按下<code>n</code>查找下一个，按下<code>N</code>查找上一个。</p>
+<p>Vim查找支持正则表达式，例如<code>/vim$</code>匹配行尾的”vim”。 需要查找特殊字符需要转义，例如<code>/vim\$</code>匹配”vim$”。</p>
+<a id="more"></a>
+<blockquote>
+<p>注意查找回车应当用\n，而替换为回车应当用\r（相当于<cr>）。</cr></p>
+</blockquote>
+<h3 id="大小写敏感查找"><a href="#大小写敏感查找" class="headerlink" title="大小写敏感查找"></a>大小写敏感查找</h3><p>在查找模式中加入\c表示大小写不敏感查找，\C表示大小写敏感查找。例如：</p>
+<p><code>/foo\c</code></p>
+<p>将会查找所有的<code>&quot;foo&quot;</code>,<code>&quot;FOO&quot;</code>,<code>&quot;Foo&quot;</code>等字符串。</p>
+<h3 id="大小写敏感配置"><a href="#大小写敏感配置" class="headerlink" title="大小写敏感配置"></a>大小写敏感配置</h3><p>Vim 默认采用大小写敏感的查找，为了方便我们常常将其配置为大小写不敏感：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">&quot; 设置默认进行大小写不敏感查找</div><div class="line">set ignorecase</div><div class="line">&quot; 如果有一个大写字母，则切换到大小写敏感查找</div><div class="line">set smartcase</div></pre></td></tr></table></figure>
+<blockquote>
+<p>将上述设置粘贴到你的~/.vimrc，重新打开Vim即可生效。</p>
+</blockquote>
+<h3 id="查找当前单词"><a href="#查找当前单词" class="headerlink" title="查找当前单词"></a>查找当前单词</h3><p>在normal模式下按下<code>*</code>即可查找光标所在单词（word）， 要求每次出现的前后为空白字符或标点符号。例如当前为<code>foo</code>， 可以匹配<code>foo bar</code>中的foo，但不可匹配<code>foobar</code>中的<code>foo</code>。 这在查找函数名、变量名时非常有用。</p>
+<p>按下<code>g*</code>即可查找光标所在单词的字符序列，每次出现前后字符无要求。 即<code>foo bar</code>和<code>foobar</code>中的<code>foo</code>均可被匹配到。</p>
+<h2 id="查找与替换"><a href="#查找与替换" class="headerlink" title="查找与替换"></a>查找与替换</h2><p>:s（substitute）命令用来查找和替换字符串。语法如下：</p>
+<pre><code>:{作用范围}s/{目标}/{替换}/{替换标志}
+</code></pre><p>例如<code>:%s/foo/bar/g</code>会在全局范围<code>(%)</code>查找<code>foo</code>并替换为<code>bar</code>，所有出现都会被替换（<code>g</code>）。</p>
+<h3 id="作用范围"><a href="#作用范围" class="headerlink" title="作用范围"></a>作用范围</h3><p>作用范围分为当前行、全文、选区等等。</p>
+<p>当前行：</p>
+<pre><code>:s/foo/bar/g
+</code></pre><p>全文：</p>
+<pre><code>:%s/foo/bar/g
+</code></pre><p>选区，在Visual模式下选择区域后输入:，Vim即可自动补全为<code>:&#39;&lt;,&#39;&gt;</code>。</p>
+<pre><code>:&apos;&lt;,&apos;&gt;s/foo/bar/g
+</code></pre><p>2-11行：</p>
+<pre><code>:5,12s/foo/bar/g
+</code></pre><p>当前行.与接下来两行<code>+2</code>：</p>
+<pre><code>:.,+2s/foo/bar/g
+</code></pre><h3 id="替换标志"><a href="#替换标志" class="headerlink" title="替换标志"></a>替换标志</h3><p>上文中命令结尾的<code>g</code>即是替换标志之一，表示全局<code>global</code>替换（即替换目标的所有出现）。 还有很多其他有用的替换标志：</p>
+<p>空替换标志表示只替换从光标位置开始，目标的第一次出现：</p>
+<pre><code>:%s/foo/bar
+</code></pre><p><code>i</code>表示大小写不敏感查找，<code>I</code>表示大小写敏感：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">:%s/foo/bar/i</div><div class="line"># 等效于模式中的\c（不敏感）或\C（敏感）</div><div class="line">:%s/foo\c/bar</div></pre></td></tr></table></figure>
+<p><code>c</code>表示需要确认，例如全局查找<code>&quot;foo&quot;</code>替换为<code>&quot;bar&quot;</code>并且需要确认：</p>
+<pre><code>:%s/foo/bar/gc
+</code></pre><p>回车后Vim会将光标移动到每一次<code>&quot;foo&quot;</code>出现的位置，并提示</p>
+<pre><code>replace with bar (y/n/a/q/l/^E/^Y)?
+</code></pre><p>按下<code>y</code>表示替换，<code>n</code>表示不替换，<code>a</code>表示替换所有，<code>q</code>表示退出查找模式， <code>l</code>表示替换当前位置并退出。<code>^E</code>与<code>^Y</code>是光标移动快捷键。</p>
+<p><a href="http://harttle.com/2016/08/08/vim-search-in-file.html" target="_blank" rel="external">出处：在 Vim 中优雅地查找和替换</a></p>
+<p><a href="#转义字符">附：转义字符说明</a></p>
+<h2 id="转义字符"><a href="#转义字符" class="headerlink" title="转义字符"></a>转义字符</h2><blockquote>
+<p>转义字符是这样一个字符，标志着在一个字符序列中出现在它之后的后续几个字符采取一种替代解释.</p>
+<p>最常见的一个例子是C程序设计语言中，用反斜线字符“\”作为转义字符，来表示那些不可打印的ASCII控制符。在URI协议中，转义字符是百分号“%”.</p>
+<p>许多程序设计语言把双引号字符（”）用作字符串的分界符。反斜线（\）转义字符提供了两种方式来把双引号字符置入字符串中，或者是使用转义序列\”表示单个的”字符本身，而不是作为字符串分界符；或者是直接开始字符”的16进制编码值的转义序列\x22来表示”.也可以使用8进制编码值的转义序列，如\042.</p>
+<p>在Perl或者Python程序设计语言中</p>
+<pre>print "Nancy said "Hello World!" to the crowd.";</pre>
+
+<p>将产生语法错误。而</p>
+<pre>print "Nancy said \"Hello World!\" to the crowd.";  ### example of \"</pre>
+
+<p>将产生期望的输出结果。 另一种可选择的办法是：</p>
+<pre>print "Nancy said \x22Hello World!\x22 to them.";  ### example of \x22</pre>
+
+<p>使用双引号字符编码值的十六进制”x22”转义字符序列. 但是，如果运行在非ASCII计算机上，将不会产生预期的结果。</p>
+<p><strong>vim中的转义,如：</strong> </p>
+<p>将每一行的 “apple/” 字符替换成 “apple/wukuan/”</p>
+<pre>%s/apple\//apple\/wukuang\//g</pre>
+</blockquote>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2017/08/24/Linux/Vim/Vim中使用查找和替换/" data-id="cj6q9jzub00085taz91riuuor" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/vim/">vim</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2017/08/23/颜色和颜色空间之颜色/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">颜色和颜色空间之颜色</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Color-Space/">Color Space</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ssh/">ssh</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vim/">vim</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/颜色/">颜色</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Color-Space/" style="font-size: 10px;">Color Space</a> <a href="/tags/ssh/" style="font-size: 10px;">ssh</a> <a href="/tags/vim/" style="font-size: 10px;">vim</a> <a href="/tags/颜色/" style="font-size: 10px;">颜色</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/">August 2017</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2017/08/24/Linux/Vim/Vim中使用查找和替换/">Vim 中使用查找和替换</a>
+          </li>
+        
+          <li>
+            <a href="/2017/08/23/颜色和颜色空间之颜色/">颜色和颜色空间之颜色</a>
+          </li>
+        
+          <li>
+            <a href="/2017/08/15/Linux/SSH远程登录和SCP远程文件传输/">SSH远程登录和SCP远程文件传输</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2017 Stoull Hut<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>
