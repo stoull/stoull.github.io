@@ -71,6 +71,335 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-在Mac上读写NTFS" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2022/01/04/%E5%9C%A8Mac%E4%B8%8A%E8%AF%BB%E5%86%99NTFS/" class="article-date">
+  <time class="dt-published" datetime="2022-01-04T12:36:00.000Z" itemprop="datePublished">2022-01-04</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Mac/">Mac</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2022/01/04/%E5%9C%A8Mac%E4%B8%8A%E8%AF%BB%E5%86%99NTFS/">Mac上读写NTFS</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <!--# Mac上读写NTFS -->
+
+<h2 id="方案一-使用macFUSE"><a href="#方案一-使用macFUSE" class="headerlink" title="方案一 使用macFUSE"></a>方案一 使用macFUSE</h2><ol>
+<li><p>下载并安装最新的mac版FUSE <a target="_blank" rel="noopener" href="http://osxfuse.github.io/">http://osxfuse.github.io. </a><br>这个步骤需要重启mac，安装后打开设置app, 在最底部可以找到<code>macFUSE</code>,能找到就可以</p>
+</li>
+<li><p>使用HomeBrew 安装 <code>NTFS-3G</code></p>
+<blockquote>
+<p><code>brew tap gromgit/homebrew-fuse</code><br><code>brew install ntfs-3g-mac</code></p>
+</blockquote>
+</li>
+</ol>
+        
+          <p class="article-more-link">
+            <a href="/2022/01/04/%E5%9C%A8Mac%E4%B8%8A%E8%AF%BB%E5%86%99NTFS/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://stoull.github.io/2022/01/04/%E5%9C%A8Mac%E4%B8%8A%E8%AF%BB%E5%86%99NTFS/" data-id="cl59kyckf0000ouj69pvg8sbw" data-title="Mac上读写NTFS" class="article-share-link">Share</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Mac/" rel="tag">Mac</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/NTFS/" rel="tag">NTFS</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-Linux/Linux挂载Mount" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2021/10/21/Linux/Linux%E6%8C%82%E8%BD%BDMount/" class="article-date">
+  <time class="dt-published" datetime="2021-10-21T10:15:18.000Z" itemprop="datePublished">2021-10-21</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Linux/">Linux</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2021/10/21/Linux/Linux%E6%8C%82%E8%BD%BDMount/">Linux 挂载(Mount)</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <!--# Linux 挂载(Mount)-->
+
+<h2 id="挂载的意义"><a href="#挂载的意义" class="headerlink" title="挂载的意义"></a>挂载的意义</h2><p>在Linux中所有的数据都被当成文件，管理这些文件使用的是<a target="_blank" rel="noopener" href="https://www.pathname.com/fhs/pub/fhs-2.3.html#MNTMOUNTPOINTFORATEMPORARILYMOUNT">目录树架构</a>。目录树可以接入很多Linux系统可识别的设备，比如键盘、鼠标、蓝牙耳机、打印机、手机、磁盘等等，这些接入的设备都可以在目录<code>/dev</code>下以文件的形式找到。但对应的文件都只是设备的描述，只是一个文件。</p>
+        
+          <p class="article-more-link">
+            <a href="/2021/10/21/Linux/Linux%E6%8C%82%E8%BD%BDMount/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://stoull.github.io/2021/10/21/Linux/Linux%E6%8C%82%E8%BD%BDMount/" data-id="cl59km1340003mfj6faz4g6t3" data-title="Linux 挂载(Mount)" class="article-share-link">Share</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Mount/" rel="tag">Mount</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-Linux/Linux命令_APT_包管理" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2021/10/20/Linux/Linux%E5%91%BD%E4%BB%A4_APT_%E5%8C%85%E7%AE%A1%E7%90%86/" class="article-date">
+  <time class="dt-published" datetime="2021-10-20T03:15:18.000Z" itemprop="datePublished">2021-10-20</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Linux/">Linux</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2021/10/20/Linux/Linux%E5%91%BD%E4%BB%A4_APT_%E5%8C%85%E7%AE%A1%E7%90%86/">高级包装工具(APT)-Advanced Packaging</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <!--# 高级包装工具(APT)-Advanced Packaging-->
+
+<p>Debian Linux uses <a target="_blank" rel="noopener" href="https://wiki.debian.org/DebianPackageManagement">dpkg packaging system</a>. A packaging system is a way to provide programs and applications for installation. </p>
+<p><a target="_blank" rel="noopener" href="https://wiki.debian.org/Apt">APT</a> (Advanced Package Tool) is the command line tool to interact with the packaging system in Debian, and Debian-based Linux Distributions.</p>
+<p>There is already dpkg commands to manage it. But APT is a more friendly way to handle packaging. You can use it to find and install new packages, upgrade packages, remove the packages etc.</p>
+        
+          <p class="article-more-link">
+            <a href="/2021/10/20/Linux/Linux%E5%91%BD%E4%BB%A4_APT_%E5%8C%85%E7%AE%A1%E7%90%86/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://stoull.github.io/2021/10/20/Linux/Linux%E5%91%BD%E4%BB%A4_APT_%E5%8C%85%E7%AE%A1%E7%90%86/" data-id="cl59kenw10000i3j6eifzhoux" data-title="高级包装工具(APT)-Advanced Packaging" class="article-share-link">Share</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/APT/" rel="tag">APT</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-Linux/Linux文件系统" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2021/10/19/Linux/Linux%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F/" class="article-date">
+  <time class="dt-published" datetime="2021-10-19T03:15:18.000Z" itemprop="datePublished">2021-10-19</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Linux/">Linux</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2021/10/19/Linux/Linux%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F/">Linux 文件系统</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <!-- # Linux 文件系统 -->
+
+<h2 id="什么是文件系统"><a href="#什么是文件系统" class="headerlink" title="什么是文件系统"></a>什么是文件系统</h2><p>想想数据在磁盘（硬盘、U盘、光盘）是怎么存储的。文件系统就在物理磁盘上存储及管理数据的系统。</p>
+        
+          <p class="article-more-link">
+            <a href="/2021/10/19/Linux/Linux%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://stoull.github.io/2021/10/19/Linux/Linux%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F/" data-id="cl59klyz70002mfj6ad6f6ajo" data-title="Linux 文件系统" class="article-share-link">Share</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-Linux/Linux命令_crontab_计划任务" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2021/10/19/Linux/Linux%E5%91%BD%E4%BB%A4_crontab_%E8%AE%A1%E5%88%92%E4%BB%BB%E5%8A%A1/" class="article-date">
+  <time class="dt-published" datetime="2021-10-19T02:20:22.000Z" itemprop="datePublished">2021-10-19</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Linux/">Linux</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2021/10/19/Linux/Linux%E5%91%BD%E4%BB%A4_crontab_%E8%AE%A1%E5%88%92%E4%BB%BB%E5%8A%A1/">Linux 计划任务 `Cron`</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <!--# Linux 计划任务 `Cron`-->
+
+<p>Truble Shoot:</p>
+<ol>
+<li><a target="_blank" rel="noopener" href="https://serverfault.com/questions/449651/why-is-my-crontab-not-working-and-how-can-i-troubleshoot-it?newreg=1345265e1c3840a7a26181bd227f9fc5">Why is my crontab not working, and how can I troubleshoot it?</a></li>
+</ol>
+<p><code>grep CRON /var/log/syslog</code> 查看系统日志</p>
+<ol start="2">
+<li>注意脚本中的相对路径及绝对路径，如果在脚本中使用的了 cat &gt;&gt; ./xxxlog.txt 其中的.表示为/home/pi/路径</li>
+</ol>
+<p><code>crontab</code>(cron table)命令用来编辑当前定时任务列表，并且是针对用户的，每一个用户（包括root）都有一个自己的定时计划任务列表。</p>
+<h3 id="编辑计划任务列表"><a href="#编辑计划任务列表" class="headerlink" title="编辑计划任务列表"></a>编辑计划任务列表</h3><pre><code>crontab -e</code></pre>
+<p><code>sudo su -</code></p>
+        
+          <p class="article-more-link">
+            <a href="/2021/10/19/Linux/Linux%E5%91%BD%E4%BB%A4_crontab_%E8%AE%A1%E5%88%92%E4%BB%BB%E5%8A%A1/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://stoull.github.io/2021/10/19/Linux/Linux%E5%91%BD%E4%BB%A4_crontab_%E8%AE%A1%E5%88%92%E4%BB%BB%E5%8A%A1/" data-id="cl59km6470005mfj627u47mf7" data-title="Linux 计划任务 `Cron`" class="article-share-link">Share</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Cron/" rel="tag">Cron</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-Linux/Linux命令_PS_任务管理" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2021/10/18/Linux/Linux%E5%91%BD%E4%BB%A4_PS_%E4%BB%BB%E5%8A%A1%E7%AE%A1%E7%90%86/" class="article-date">
+  <time class="dt-published" datetime="2021-10-18T05:20:22.000Z" itemprop="datePublished">2021-10-18</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Linux/">Linux</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2021/10/18/Linux/Linux%E5%91%BD%E4%BB%A4_PS_%E4%BB%BB%E5%8A%A1%E7%AE%A1%E7%90%86/">Linux 命令：任务管理 ps</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <!--# Linux 命令：任务管理 `ps`-->
+
+<p>常用 <code>man ps</code>命令</p>
+<p><code>PID</code> : -  This is the unique process ID</p>
+<p><code>PPID</code> : -  This is the the Parent Process ID</p>
+<p><code>S/STAT</code>: the current status of the process</p>
+        
+          <p class="article-more-link">
+            <a href="/2021/10/18/Linux/Linux%E5%91%BD%E4%BB%A4_PS_%E4%BB%BB%E5%8A%A1%E7%AE%A1%E7%90%86/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://stoull.github.io/2021/10/18/Linux/Linux%E5%91%BD%E4%BB%A4_PS_%E4%BB%BB%E5%8A%A1%E7%AE%A1%E7%90%86/" data-id="cl59km3mv0004mfj6bguze9jc" data-title="Linux 命令：任务管理 ps" class="article-share-link">Share</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ps/" rel="tag">ps</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
     <article id="post-SSH远程登录和SCP远程文件传输" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
     <a href="/2017/08/26/SSH%E8%BF%9C%E7%A8%8B%E7%99%BB%E5%BD%95%E5%92%8CSCP%E8%BF%9C%E7%A8%8B%E6%96%87%E4%BB%B6%E4%BC%A0%E8%BE%93/" class="article-date">
@@ -78,7 +407,7 @@
 </a>
     
   <div class="article-category">
-    <a class="article-category-link" href="/categories/bash/">bash</a>
+    <a class="article-category-link" href="/categories/Linux/">Linux</a>
   </div>
 
   </div>
@@ -114,7 +443,7 @@
       
       
       
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/scp/" rel="tag">scp</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ssh/" rel="tag">ssh</a></li></ul>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/scp/" rel="tag">scp</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ssh/" rel="tag">ssh</a></li></ul>
 
     </footer>
   </div>
@@ -290,7 +619,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Categories</h3>
     <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Animation/">Animation</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Animation/Core-Graphics/">Core Graphics</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Core-Graphics/">Core Graphics</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/bash/">bash</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/vim/">vim</a></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Animation/">Animation</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Animation/Core-Graphics/">Core Graphics</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Core-Graphics/">Core Graphics</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Mac/">Mac</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/vim/">vim</a></li></ul>
     </div>
   </div>
 
@@ -300,7 +629,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tags</h3>
     <div class="widget">
-      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Animation/" rel="tag">Animation</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Color-Space/" rel="tag">Color Space</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/scp/" rel="tag">scp</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ssh/" rel="tag">ssh</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vim/" rel="tag">vim</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%A2%9C%E8%89%B2/" rel="tag">颜色</a></li></ul>
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/APT/" rel="tag">APT</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Animation/" rel="tag">Animation</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Color-Space/" rel="tag">Color Space</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Cron/" rel="tag">Cron</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Mac/" rel="tag">Mac</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Mount/" rel="tag">Mount</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NTFS/" rel="tag">NTFS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ps/" rel="tag">ps</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/scp/" rel="tag">scp</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ssh/" rel="tag">ssh</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vim/" rel="tag">vim</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%A2%9C%E8%89%B2/" rel="tag">颜色</a></li></ul>
     </div>
   </div>
 
@@ -310,7 +639,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/Animation/" style="font-size: 10px;">Animation</a> <a href="/tags/Color-Space/" style="font-size: 10px;">Color Space</a> <a href="/tags/scp/" style="font-size: 10px;">scp</a> <a href="/tags/ssh/" style="font-size: 10px;">ssh</a> <a href="/tags/vim/" style="font-size: 10px;">vim</a> <a href="/tags/%E9%A2%9C%E8%89%B2/" style="font-size: 10px;">颜色</a>
+      <a href="/tags/APT/" style="font-size: 10px;">APT</a> <a href="/tags/Animation/" style="font-size: 10px;">Animation</a> <a href="/tags/Color-Space/" style="font-size: 10px;">Color Space</a> <a href="/tags/Cron/" style="font-size: 10px;">Cron</a> <a href="/tags/Linux/" style="font-size: 20px;">Linux</a> <a href="/tags/Mac/" style="font-size: 10px;">Mac</a> <a href="/tags/Mount/" style="font-size: 10px;">Mount</a> <a href="/tags/NTFS/" style="font-size: 10px;">NTFS</a> <a href="/tags/ps/" style="font-size: 10px;">ps</a> <a href="/tags/scp/" style="font-size: 10px;">scp</a> <a href="/tags/ssh/" style="font-size: 10px;">ssh</a> <a href="/tags/vim/" style="font-size: 10px;">vim</a> <a href="/tags/%E9%A2%9C%E8%89%B2/" style="font-size: 10px;">颜色</a>
     </div>
   </div>
 
@@ -319,7 +648,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/">August 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">May 2016</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/01/">January 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/10/">October 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/">August 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">May 2016</a></li></ul>
     </div>
   </div>
 
@@ -332,19 +661,23 @@
       <ul>
         
           <li>
-            <a href="/2017/08/26/SSH%E8%BF%9C%E7%A8%8B%E7%99%BB%E5%BD%95%E5%92%8CSCP%E8%BF%9C%E7%A8%8B%E6%96%87%E4%BB%B6%E4%BC%A0%E8%BE%93/">SSH远程登录和SCP远程文件传输</a>
+            <a href="/2022/01/04/%E5%9C%A8Mac%E4%B8%8A%E8%AF%BB%E5%86%99NTFS/">Mac上读写NTFS</a>
           </li>
         
           <li>
-            <a href="/2017/08/26/Vim%E4%B8%AD%E4%BD%BF%E7%94%A8%E6%9F%A5%E6%89%BE%E5%92%8C%E6%9B%BF%E6%8D%A2/">Vim 中使用查找和替换</a>
+            <a href="/2021/10/21/Linux/Linux%E6%8C%82%E8%BD%BDMount/">Linux 挂载(Mount)</a>
           </li>
         
           <li>
-            <a href="/2017/08/23/%E9%A2%9C%E8%89%B2%E5%92%8C%E9%A2%9C%E8%89%B2%E7%A9%BA%E9%97%B4%E4%B9%8B%E9%A2%9C%E8%89%B2/">颜色和颜色空间之颜色</a>
+            <a href="/2021/10/20/Linux/Linux%E5%91%BD%E4%BB%A4_APT_%E5%8C%85%E7%AE%A1%E7%90%86/">高级包装工具(APT)-Advanced Packaging</a>
           </li>
         
           <li>
-            <a href="/2016/05/27/%E5%B9%B3%E9%9D%A2%E6%B3%A2%E5%8A%A8%E6%96%B9%E7%A8%8B%E5%AE%9E%E7%8E%B0%E7%BA%BF%E6%9D%A1%E6%B3%A2%E5%8A%A8%E6%95%88%E6%9E%9C/">平面波动方程实现线条波动效果</a>
+            <a href="/2021/10/19/Linux/Linux%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F/">Linux 文件系统</a>
+          </li>
+        
+          <li>
+            <a href="/2021/10/19/Linux/Linux%E5%91%BD%E4%BB%A4_crontab_%E8%AE%A1%E5%88%92%E4%BB%BB%E5%8A%A1/">Linux 计划任务 `Cron`</a>
           </li>
         
       </ul>
@@ -360,7 +693,7 @@
   <div class="outer">
     <div id="footer-info" class="inner">
       
-      &copy; 2021 Stoull Hut<br>
+      &copy; 2022 Stoull Hut<br>
       Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
     </div>
   </div>

@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>Linux 文件系统 | Hut&#39;s left Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="什么是文件系统想想数据在磁盘（硬盘、U盘、光盘）是怎么存储的。文件系统就在物理磁盘上存储及管理数据的系统。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Linux 文件系统">
+<meta property="og:url" content="https://stoull.github.io/2021/10/19/Linux/Linux%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F/index.html">
+<meta property="og:site_name" content="Hut&#39;s left Blog">
+<meta property="og:description" content="什么是文件系统想想数据在磁盘（硬盘、U盘、光盘）是怎么存储的。文件系统就在物理磁盘上存储及管理数据的系统。">
+<meta property="og:locale">
+<meta property="article:published_time" content="2021-10-19T03:15:18.000Z">
+<meta property="article:modified_time" content="2022-07-06T12:31:19.494Z">
+<meta property="article:author" content="Stoull Hut">
+<meta property="article:tag" content="Linux">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Hut's left Blog" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.ico">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hut&#39;s left Blog</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://stoull.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-Linux/Linux文件系统" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2021/10/19/Linux/Linux%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F/" class="article-date">
+  <time class="dt-published" datetime="2021-10-19T03:15:18.000Z" itemprop="datePublished">2021-10-19</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Linux/">Linux</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      Linux 文件系统
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <!-- # Linux 文件系统 -->
+
+<h2 id="什么是文件系统"><a href="#什么是文件系统" class="headerlink" title="什么是文件系统"></a>什么是文件系统</h2><p>想想数据在磁盘（硬盘、U盘、光盘）是怎么存储的。文件系统就在物理磁盘上存储及管理数据的系统。</p>
+<a id="more"></a>
+
+<h3 id="特性："><a href="#特性：" class="headerlink" title="特性："></a>特性：</h3><ul>
+<li><p>物理磁盘分区后，需要格式化为对应的一种文件系统，之后才能在这个磁盘中进行数据的存储等操作。</p>
+<blockquote>
+<p>安装操作系统之前为什么要格式化，因为每种操作系统所设置的文件属性/权限并不相同</p>
+</blockquote>
+</li>
+<li><p>每种计算机操作系统能够使用的文件系统并不相同</p>
+<ul>
+<li>Linux 的标准文件系统: ext2， ext3, ext4, XFS</li>
+<li>Microsoft operating system: FAT, FAT16, FAT32, NTFS, ExFAT</li>
+<li>Mac OS: Mac OS Extended(HFS+), Apple File System (APFS)</li>
+</ul>
+</li>
+</ul>
+<h3 id="具体运作"><a href="#具体运作" class="headerlink" title="具体运作:"></a>具体运作:</h3><h4 id="索引式文件系统（indexed-allocation）"><a href="#索引式文件系统（indexed-allocation）" class="headerlink" title="索引式文件系统（indexed allocation）"></a>索引式文件系统（indexed allocation）</h4><p>实际的将文件存到磁盘，通常会有三个部分的数据存储下来：</p>
+<ol>
+<li>文件的属性数据， 比如文件的权限，拥有者，文件的大小，创建时间等等。</li>
+<li>文件的实际数据，比如电影每一帧的数据。</li>
+<li>文件系统自身的整体信息数据。比如文件系统的格式啊，用了多少还剩多少</li>
+</ol>
+<p>文件系统用inode来存储文件的属性, data block来存储文件的实际数据，用superblock来记录filesystem的整体信息，具体信息如下：</p>
+<ul>
+<li>superblock：记录此 filesystem 的整体信息，包括inode/block的总量、使用量、剩余量， 以及文件系统的格式与相关信息等；</li>
+<li>inode：记录文件的属性，一个文件占用一个inode，同时记录此文件的数据所在的 block 号码；</li>
+<li>block：实际记录文件的内容，若文件太大时，会占用多个 block 。</li>
+</ul>
+<p>磁盘在格式化的时候，会将磁盘分区分出几个区域，有一个区域用来专门存放superblock， 有一个区域专门用来存放 inode，还有一个区域专门用来存放data block。</p>
+<p>每一个data block和data block都有编号，每一个文件都会占用一个inode，并且inode内存有实际文件数据存放的 block号码。这样找到文件的inode就能找到对应的实际文件数据位置。</p>
+<blockquote>
+</blockquote>
+<ul>
+<li>inode的大小一般为128 Bytes，新的ext4或xfs可设置256 Bytes。</li>
+<li>对于目录，文件系统会分配一个 inode 与至少一块 block 给该目录。其中，inode 记录该目录的相关权限与属性，并可记录分配到的那块 block 号码； 而 block 则是记录在这个目录下的文件名与该文件名占用的 inode 号码数据。</li>
+<li>superblock 中用block bitmap及inode bitmap存放有所有已用的及未用的 block 及 inode信息。</li>
+</ul>
+<p>磁盘在格式化的时候就会把inode和data block规划好，在使用的时候是固定不变的。除非格式化的时候会重新规划。</p>
+<blockquote>
+</blockquote>
+<ul>
+<li>磁盘容量大，为了方便管理，在格式化的时候基本上是区分为多个区块群组 （block group） 的，每个区块群组都有独立的 inode/block/superblock 系统</li>
+<li>如果磁盘大的话，规划inode及block就需要很长的时间，格式化动作慢。XFS 文件系统的inode与 block 是系统需要用到时才动态产生，格式化动作快。</li>
+<li>data block 的大小，可在格式化的时候指定1K, 2K 及 4K，可根据需求选择。格式化大block考虑磁盘容量浪费，格式化小block考虑磁盘的读写性能。</li>
+<li>可能会出现inode先用完，而data block没有用完的情况。</li>
+</ul>
+<h4 id="查看文件系统信息"><a href="#查看文件系统信息" class="headerlink" title="查看文件系统信息"></a>查看文件系统信息</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[root@study ~]# dumpe2fs [-bh] 设备文件名</span><br><span class="line">选项与参数：</span><br><span class="line">-b ：列出保留为坏轨的部分（一般用不到吧！？）</span><br><span class="line">-h ：仅列出 superblock 的数据，不会列出其他的区段内容！</span><br></pre></td></tr></table></figure>
+
+<p><code>blkid &amp;lt;==</code> 这个指令可以叫出目前系统有被格式化的设备</p>
+<p><code>fdisk -lu</code> 查看当前盘的每个分区情况</p>
+<p><code>dumpe2fs /dev/sda2</code> 可列出文件系统信息</p>
+<h4 id="非索引式文件系统（indexed-allocation）"><a href="#非索引式文件系统（indexed-allocation）" class="headerlink" title="非索引式文件系统（indexed allocation）"></a>非索引式文件系统（indexed allocation）</h4><p>Windows中的FAT文件系统就不是索引式文件系统,像是一个链式系统，每一个数据块都存放下一个数据块的索引<br>闪存文件系统：JFFS2与YAFFS</p>
+<p> <code>磁盘碎片整理</code>，<code>磁盘重组</code> 这些概念就是因为非索引式文件系统的数据块太过离散，需要将block进行整理，提高读性性能。索引式文件系统就较少需要进行碎片整理。</p>
+<h3 id="文件的写入过程"><a href="#文件的写入过程" class="headerlink" title="文件的写入过程"></a>文件的写入过程</h3><p>假设我们想要新增一个文件，此时文件系统的行为是：</p>
+<ol>
+<li>先确定使用者对于欲新增文件的目录是否具有 w 与 x 的权限，若有的话才能新增；</li>
+<li>根据 inode bitmap 找到没有使用的 inode 号码，并将新文件的权限/属性写入；</li>
+<li>根据 block bitmap 找到没有使用中的 block 号码，并将实际的数据写入 block 中，且更新 inode 的 block 指向数据；</li>
+<li>将刚刚写入的 inode 与 block 数据同步更新 inode bitmap 与 block bitmap，并更新 superblock 的内容。</li>
+</ol>
+<h4 id="日志式文件系统-（Journaling-filesystem）"><a href="#日志式文件系统-（Journaling-filesystem）" class="headerlink" title="日志式文件系统 （Journaling filesystem）"></a>日志式文件系统 （Journaling filesystem）</h4><p>如果系统在上述文件的写入过程中遇到断电，完成了第三步而没有完成第四步，就会产生superblock中的记录与实际的数据不一致。操作系统在开机的时候就会进行数据检查。全盘检查很费时，日志式文件系统的出现用来简化一致性检查的步骤。日志式文件系统会规划出一个区域，用来记录文件写入或修改时的步骤。如下：</p>
+<blockquote>
+</blockquote>
+<ol>
+<li>预备：当系统要写入一个文件时，会先在日志记录区块中纪录某个文件准备要写入的信息；</li>
+<li>实际写入：开始写入文件的权限与数据；开始更新 metadata 的数据；</li>
+<li>结束：完成数据与 metadata 的更新后，在日志记录区块当中完成该文件的纪录。</li>
+</ol>
+<p>如果出现不一致的问题，只要查日志记录区块就可以了，需不要全盘检查。</p>
+<h2 id="文件系统的类型"><a href="#文件系统的类型" class="headerlink" title="文件系统的类型"></a>文件系统的类型</h2><ul>
+<li>传统文件系统：ext2 / minix / MS-DOS / FAT （用 vfat 模块） / iso9660 （光盘）等等；</li>
+<li>日志式文件系统：ext3 /ext4 / ReiserFS / Windows’ NTFS / IBM’s JFS / SGI’s XFS / ZFS / APFS</li>
+<li>网络文件系统：NFS, SMBFS, SMB, CIFS, WebDAV, AFP</li>
+</ul>
+<h2 id="不同的操作系统支持不同的文件系统"><a href="#不同的操作系统支持不同的文件系统" class="headerlink" title="不同的操作系统支持不同的文件系统"></a>不同的操作系统支持不同的文件系统</h2><h3 id="Linux-系统-VFS"><a href="#Linux-系统-VFS" class="headerlink" title="Linux 系统 VFS"></a>Linux 系统 VFS</h3><p>很多硬盘插上就能用，而不用我们指定用什么文件系统去读取。这是VFS(Virtual Filesystem Switch)核心功能在帮忙做文件系统的读取工作。整个 Linux 认识的 filesystem 都是 VFS 在进行管理，VFS自动检测分区上的文件系统类型。</p>
+<p>查看Linux支持的文件系统： <code>ls -l /lib/modules/$(uname -r)/kernel/fs</code></p>
+<p>查看Linux已载入到内存中的支持的文件系统： <code>cat /proc/filesystems</code></p>
+<p><strong>主要是下面的学习资料记录：</strong></p>
+<p><a target="_blank" rel="noopener" href="https://wizardforcel.gitbooks.io/vbird-linux-basic-4e/content/59.html">鸟哥私房菜 - 7.1 认识 Linux 文件系统</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/justmine/p/9128730.html">漫谈Linux标准的文件系统(Ext2/Ext3/Ext4)</a></p>
+<p><a target="_blank" rel="noopener" href="https://segmentfault.com/a/1190000023615225">一口气搞懂「文件系统」，就靠这 25 张图了</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://stoull.github.io/2021/10/19/Linux/Linux%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F/" data-id="cl59klyz70002mfj6ad6f6ajo" data-title="Linux 文件系统" class="article-share-link">Share</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2021/10/20/Linux/Linux%E5%91%BD%E4%BB%A4_APT_%E5%8C%85%E7%AE%A1%E7%90%86/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          高级包装工具(APT)-Advanced Packaging
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2021/10/19/Linux/Linux%E5%91%BD%E4%BB%A4_crontab_%E8%AE%A1%E5%88%92%E4%BB%BB%E5%8A%A1/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Linux 计划任务 `Cron`</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Animation/">Animation</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Animation/Core-Graphics/">Core Graphics</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Core-Graphics/">Core Graphics</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Mac/">Mac</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/vim/">vim</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/APT/" rel="tag">APT</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Animation/" rel="tag">Animation</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Color-Space/" rel="tag">Color Space</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Cron/" rel="tag">Cron</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Mac/" rel="tag">Mac</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Mount/" rel="tag">Mount</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NTFS/" rel="tag">NTFS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ps/" rel="tag">ps</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/scp/" rel="tag">scp</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ssh/" rel="tag">ssh</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vim/" rel="tag">vim</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%A2%9C%E8%89%B2/" rel="tag">颜色</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/APT/" style="font-size: 10px;">APT</a> <a href="/tags/Animation/" style="font-size: 10px;">Animation</a> <a href="/tags/Color-Space/" style="font-size: 10px;">Color Space</a> <a href="/tags/Cron/" style="font-size: 10px;">Cron</a> <a href="/tags/Linux/" style="font-size: 20px;">Linux</a> <a href="/tags/Mac/" style="font-size: 10px;">Mac</a> <a href="/tags/Mount/" style="font-size: 10px;">Mount</a> <a href="/tags/NTFS/" style="font-size: 10px;">NTFS</a> <a href="/tags/ps/" style="font-size: 10px;">ps</a> <a href="/tags/scp/" style="font-size: 10px;">scp</a> <a href="/tags/ssh/" style="font-size: 10px;">ssh</a> <a href="/tags/vim/" style="font-size: 10px;">vim</a> <a href="/tags/%E9%A2%9C%E8%89%B2/" style="font-size: 10px;">颜色</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/01/">January 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/10/">October 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/">August 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">May 2016</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2022/01/04/%E5%9C%A8Mac%E4%B8%8A%E8%AF%BB%E5%86%99NTFS/">Mac上读写NTFS</a>
+          </li>
+        
+          <li>
+            <a href="/2021/10/21/Linux/Linux%E6%8C%82%E8%BD%BDMount/">Linux 挂载(Mount)</a>
+          </li>
+        
+          <li>
+            <a href="/2021/10/20/Linux/Linux%E5%91%BD%E4%BB%A4_APT_%E5%8C%85%E7%AE%A1%E7%90%86/">高级包装工具(APT)-Advanced Packaging</a>
+          </li>
+        
+          <li>
+            <a href="/2021/10/19/Linux/Linux%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F/">Linux 文件系统</a>
+          </li>
+        
+          <li>
+            <a href="/2021/10/19/Linux/Linux%E5%91%BD%E4%BB%A4_crontab_%E8%AE%A1%E5%88%92%E4%BB%BB%E5%8A%A1/">Linux 计划任务 `Cron`</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2022 Stoull Hut<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.4.1.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>

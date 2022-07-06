@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>Linux 命令：任务管理 ps | Hut&#39;s left Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="常用 man ps命令 PID : -  This is the unique process ID PPID : -  This is the the Parent Process ID S&#x2F;STAT: the current status of the process">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Linux 命令：任务管理 ps">
+<meta property="og:url" content="https://stoull.github.io/2021/10/18/Linux/Linux%E5%91%BD%E4%BB%A4_PS_%E4%BB%BB%E5%8A%A1%E7%AE%A1%E7%90%86/index.html">
+<meta property="og:site_name" content="Hut&#39;s left Blog">
+<meta property="og:description" content="常用 man ps命令 PID : -  This is the unique process ID PPID : -  This is the the Parent Process ID S&#x2F;STAT: the current status of the process">
+<meta property="og:locale">
+<meta property="article:published_time" content="2021-10-18T05:20:22.000Z">
+<meta property="article:modified_time" content="2022-07-06T12:30:17.031Z">
+<meta property="article:author" content="Stoull Hut">
+<meta property="article:tag" content="Linux">
+<meta property="article:tag" content="ps">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Hut's left Blog" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.ico">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hut&#39;s left Blog</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://stoull.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-Linux/Linux命令_PS_任务管理" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2021/10/18/Linux/Linux%E5%91%BD%E4%BB%A4_PS_%E4%BB%BB%E5%8A%A1%E7%AE%A1%E7%90%86/" class="article-date">
+  <time class="dt-published" datetime="2021-10-18T05:20:22.000Z" itemprop="datePublished">2021-10-18</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Linux/">Linux</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      Linux 命令：任务管理 ps
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <!--# Linux 命令：任务管理 `ps`-->
+
+<p>常用 <code>man ps</code>命令</p>
+<p><code>PID</code> : -  This is the unique process ID</p>
+<p><code>PPID</code> : -  This is the the Parent Process ID</p>
+<p><code>S/STAT</code>: the current status of the process</p>
+<a id="more"></a>
+
+
+<p>进程状态解释：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">I       Marks a process that is idle (sleeping for longer than about 20 seconds).</span><br><span class="line">R       Marks a runnable process.</span><br><span class="line">S       Marks a process that is sleeping for less than about 20 seconds.</span><br><span class="line">T       Marks a stopped process.</span><br><span class="line">U       Marks a process in uninterruptible wait.</span><br><span class="line">Z       Marks a dead process (a &#96;&#96;zombie&#39;&#39;).</span><br><span class="line"></span><br><span class="line">Additional characters after these, if any, indicate additional state information:</span><br><span class="line"></span><br><span class="line">+       The process is in the foreground process group of its control terminal.</span><br><span class="line">&lt;       The process has raised CPU scheduling priority.</span><br><span class="line">&gt;       The process has specified a soft limit on memory requirements and is currently exceeding that limit;</span><br><span class="line">       such a process is (necessarily) not swapped.</span><br><span class="line">A       the process has asked for random page replacement (VA_ANOM, from vadvise(2), for example, lisp(1) in</span><br><span class="line">       a garbage collect).</span><br><span class="line">E       The process is trying to exit.</span><br><span class="line">L       The process has pages locked in core (for example, for raw I&#x2F;O).</span><br><span class="line">N       The process has reduced CPU scheduling priority (see setpriority(2)).</span><br><span class="line">S       The process has asked for FIFO page replacement (VA_SEQL, from vadvise(2), for example, a large</span><br><span class="line">       image processing program using virtual memory to sequentially address voluminous data).</span><br><span class="line">s       The process is a session leader.</span><br><span class="line">V       The process is suspended during a vfork(2).</span><br><span class="line">W       The process is swapped out.</span><br><span class="line">X       The process is being traced or debugged.</span><br></pre></td></tr></table></figure>
+
+<p><code>%cpu</code> : -  percentage CPU usage (alias pcpu)<br><code>%mem</code> : -  percentage memory usage (alias pmem)</p>
+<p><code>TTY</code> : -  the name of the console that the user is logged into</p>
+<p><code>TIME</code> : -  the amount of CPU in minutes and seconds that the process has been running<br><code>CMD</code> : -  the name of the command that launched the process</p>
+<p>Examples:</p>
+<p><code>$ ps aux</code>  列出当前用户进程 </p>
+<p><code>$ ps -A</code>  列出所有进程</p>
+<p><code>$ ps -A --forest</code>  按树状结构列出所有进程</p>
+<p><code>$ ps -l</code>  列出所进程详细信息</p>
+<h3 id="缩小范围查找"><a href="#缩小范围查找" class="headerlink" title="缩小范围查找"></a>缩小范围查找</h3><p><code>$ ps -C Xcode</code>  使用关健字键字进行过滤 <strong>mac及rpi上待验证</strong></p>
+<p><code>$ ps -l -p 3536</code>  列出出特定PID的进程</p>
+<p><code>$ ps -hut</code>  列出出特定用户的进程</p>
+<p><code>$ ps --ppid 3536</code>  列出PID下的线程信息 <strong>mac及rpi上待验证</strong></p>
+<p><code>$ ps -o user,pid,%cpu,%mem,stat,time</code> 根据字段查询进程信息</p>
+<p><code>ps aux | egrep &#39;(cron|syslog)&#39;</code> 查找与cron 与 syslog 这两个服务有关的 PID 号码</p>
+<h3 id="排序"><a href="#排序" class="headerlink" title="排序"></a>排序</h3><p><code>$ ps -A --sort=pcpu</code> 按cup使用率排序  或：</p>
+<p><code>$ ps -l | sort -nk 3 | head -3</code> 按cup使用率排序  </p>
+<p><code>$ ps -A --sort=pmem</code> 按内存使用率排序  或：</p>
+<p><code>$ ps -l | sort -nk 3 | head -3</code> 按内存使用率排序</p>
+<p><strong>注意：</strong></p>
+<blockquote>
+<p><code>--sort</code> is supported by ps from procps, other implementations may not have this option.如：<br><code>$ ps --sort=-pcpu | head -n 6</code></p>
+</blockquote>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://stoull.github.io/2021/10/18/Linux/Linux%E5%91%BD%E4%BB%A4_PS_%E4%BB%BB%E5%8A%A1%E7%AE%A1%E7%90%86/" data-id="cl59km3mv0004mfj6bguze9jc" data-title="Linux 命令：任务管理 ps" class="article-share-link">Share</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ps/" rel="tag">ps</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2021/10/19/Linux/Linux%E5%91%BD%E4%BB%A4_crontab_%E8%AE%A1%E5%88%92%E4%BB%BB%E5%8A%A1/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          Linux 计划任务 `Cron`
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2017/08/26/SSH%E8%BF%9C%E7%A8%8B%E7%99%BB%E5%BD%95%E5%92%8CSCP%E8%BF%9C%E7%A8%8B%E6%96%87%E4%BB%B6%E4%BC%A0%E8%BE%93/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">SSH远程登录和SCP远程文件传输</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Animation/">Animation</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Animation/Core-Graphics/">Core Graphics</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Core-Graphics/">Core Graphics</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Mac/">Mac</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/vim/">vim</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/APT/" rel="tag">APT</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Animation/" rel="tag">Animation</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Color-Space/" rel="tag">Color Space</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Cron/" rel="tag">Cron</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Mac/" rel="tag">Mac</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Mount/" rel="tag">Mount</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NTFS/" rel="tag">NTFS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ps/" rel="tag">ps</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/scp/" rel="tag">scp</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ssh/" rel="tag">ssh</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vim/" rel="tag">vim</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%A2%9C%E8%89%B2/" rel="tag">颜色</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/APT/" style="font-size: 10px;">APT</a> <a href="/tags/Animation/" style="font-size: 10px;">Animation</a> <a href="/tags/Color-Space/" style="font-size: 10px;">Color Space</a> <a href="/tags/Cron/" style="font-size: 10px;">Cron</a> <a href="/tags/Linux/" style="font-size: 20px;">Linux</a> <a href="/tags/Mac/" style="font-size: 10px;">Mac</a> <a href="/tags/Mount/" style="font-size: 10px;">Mount</a> <a href="/tags/NTFS/" style="font-size: 10px;">NTFS</a> <a href="/tags/ps/" style="font-size: 10px;">ps</a> <a href="/tags/scp/" style="font-size: 10px;">scp</a> <a href="/tags/ssh/" style="font-size: 10px;">ssh</a> <a href="/tags/vim/" style="font-size: 10px;">vim</a> <a href="/tags/%E9%A2%9C%E8%89%B2/" style="font-size: 10px;">颜色</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/01/">January 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/10/">October 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/">August 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">May 2016</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2022/01/04/%E5%9C%A8Mac%E4%B8%8A%E8%AF%BB%E5%86%99NTFS/">Mac上读写NTFS</a>
+          </li>
+        
+          <li>
+            <a href="/2021/10/21/Linux/Linux%E6%8C%82%E8%BD%BDMount/">Linux 挂载(Mount)</a>
+          </li>
+        
+          <li>
+            <a href="/2021/10/20/Linux/Linux%E5%91%BD%E4%BB%A4_APT_%E5%8C%85%E7%AE%A1%E7%90%86/">高级包装工具(APT)-Advanced Packaging</a>
+          </li>
+        
+          <li>
+            <a href="/2021/10/19/Linux/Linux%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F/">Linux 文件系统</a>
+          </li>
+        
+          <li>
+            <a href="/2021/10/19/Linux/Linux%E5%91%BD%E4%BB%A4_crontab_%E8%AE%A1%E5%88%92%E4%BB%BB%E5%8A%A1/">Linux 计划任务 `Cron`</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2022 Stoull Hut<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.4.1.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>

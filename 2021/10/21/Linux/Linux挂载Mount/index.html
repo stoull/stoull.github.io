@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>Linux 挂载(Mount) | Hut&#39;s left Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="挂载的意义在Linux中所有的数据都被当成文件，管理这些文件使用的是目录树架构。目录树可以接入很多Linux系统可识别的设备，比如键盘、鼠标、蓝牙耳机、打印机、手机、磁盘等等，这些接入的设备都可以在目录&#x2F;dev下以文件的形式找到。但对应的文件都只是设备的描述，只是一个文件。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Linux 挂载(Mount)">
+<meta property="og:url" content="https://stoull.github.io/2021/10/21/Linux/Linux%E6%8C%82%E8%BD%BDMount/index.html">
+<meta property="og:site_name" content="Hut&#39;s left Blog">
+<meta property="og:description" content="挂载的意义在Linux中所有的数据都被当成文件，管理这些文件使用的是目录树架构。目录树可以接入很多Linux系统可识别的设备，比如键盘、鼠标、蓝牙耳机、打印机、手机、磁盘等等，这些接入的设备都可以在目录&#x2F;dev下以文件的形式找到。但对应的文件都只是设备的描述，只是一个文件。">
+<meta property="og:locale">
+<meta property="article:published_time" content="2021-10-21T10:15:18.000Z">
+<meta property="article:modified_time" content="2022-07-06T12:30:50.164Z">
+<meta property="article:author" content="Stoull Hut">
+<meta property="article:tag" content="Linux">
+<meta property="article:tag" content="Mount">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Hut's left Blog" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.ico">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hut&#39;s left Blog</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://stoull.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-Linux/Linux挂载Mount" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2021/10/21/Linux/Linux%E6%8C%82%E8%BD%BDMount/" class="article-date">
+  <time class="dt-published" datetime="2021-10-21T10:15:18.000Z" itemprop="datePublished">2021-10-21</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Linux/">Linux</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      Linux 挂载(Mount)
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <!--# Linux 挂载(Mount)-->
+
+<h2 id="挂载的意义"><a href="#挂载的意义" class="headerlink" title="挂载的意义"></a>挂载的意义</h2><p>在Linux中所有的数据都被当成文件，管理这些文件使用的是<a target="_blank" rel="noopener" href="https://www.pathname.com/fhs/pub/fhs-2.3.html#MNTMOUNTPOINTFORATEMPORARILYMOUNT">目录树架构</a>。目录树可以接入很多Linux系统可识别的设备，比如键盘、鼠标、蓝牙耳机、打印机、手机、磁盘等等，这些接入的设备都可以在目录<code>/dev</code>下以文件的形式找到。但对应的文件都只是设备的描述，只是一个文件。</p>
+<a id="more"></a>
+
+<blockquote>
+</blockquote>
+<p>磁盘设备硬件命名:</p>
+<blockquote>
+</blockquote>
+<ul>
+<li>/dev/sd[a-p][1-128]：为实体磁盘的磁盘文件名；</li>
+<li>/dev/vd[a-d][1-128]：为虚拟磁盘的磁盘文件名；</li>
+</ul>
+<p>如果对应的设备为你的一个磁盘，你是不能从<code>/dev/sda1</code>这个文件中进入你的磁盘的。挂载是将磁盘中的文件系统接入到Linux系统目录树下的一个目录里，实现对磁盘的读写。</p>
+<p>鼠标、耳机等不提供数据存储的设备的接入不是叫挂载，挂载只针对提供数据存储的设备接入到Linux系统。</p>
+<ul>
+<li>Linux系统文件管理使用的是目录树架构，遵循FHS标准。</li>
+<li>存储设备的文件管理系统不在这个目录树架构中。</li>
+<li>将存储设备的文件管理系统按目录树的架构接入Linux系统文件管理树，就为挂载。</li>
+</ul>
+<details>
+  <summary>更多关于'挂载'的不厌其烦</summary>
+
+<p>  在Linux中所有的数据都被当成文件(Everything Is A File)，管理这些文件使用的是目录树架构(tree-like hierarchical structure)，遵循<a target="_blank" rel="noopener" href="https://www.pathname.com/fhs/">FHS</a>标准(<a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Filesystem_Hierarchy_Standard">Wiki</a>)。在磁盘安装系统之前是不会有<code>/, /tec, /dev, /bin</code>这些目录的，所以FHS标准是写在系统代码里的。当你在安装系统的时候，系统会在内存里生成对应的目录树。但生成之后需要将这些数据保存在磁盘里，怎么存？</p>
+<p>在安装系统的时候，一般要指定安装的磁盘，系统安装的时候会将磁盘进行分区和格式化，将磁盘上的物理空间与系统按FHS标准生成的根目录对应起来的东西，就叫挂载。当系统完成安装的时候，我们就可以在磁盘上找到<code>/, /tec, /dev, /bin.....</code>这些目录。系统启动之后，只要在系统的目录树里新建或修改文件，就可以同步到磁盘里的文件系统中。</p>
+<p>磁盘设备在目录树中也是一个文件，但磁盘是作为一个设备存在于<code>/dev</code>文件夹下。存储设备都有一个文件系统，需要通过这个文件系统才能在物理磁盘进行数据的存储操作。将磁盘的文件系统接入Linux遵循FHS标准的文件系统中，就是挂载。挂载完之后才能对磁盘数据进操作。</p>
+<ul>
+<li>根目录一般会单独挂载到一个分区，主要是为了保证安全。</li>
+<li>用户的home目录会挂载到单独的一个分区。</details>
+
+</li>
+</ul>
+<h2 id="挂载的注意事项"><a href="#挂载的注意事项" class="headerlink" title="挂载的注意事项"></a>挂载的注意事项</h2><ul>
+<li>单一文件系统不应该重复挂载在不同的挂载点（目录）中；</li>
+<li>单一目录不应该重复挂载多个文件系统；</li>
+<li>要作为挂载点的目录，理论上应该都是空目录。</li>
+</ul>
+<p>所有磁盘设备及分区都以文件的形式存储在/dev/,但是这些文件不能直接使用，如果要往这些分区内写入数据就需要挂载分区。<br>所谓的挂载点就是文件系统中存在的一个目录，通常情况下，创建在/mnt目录下，挂载成功后，访问挂载点就是访问新的存储设备。</p>
+<h2 id="如何挂载一个磁盘"><a href="#如何挂载一个磁盘" class="headerlink" title="如何挂载一个磁盘"></a>如何挂载一个磁盘</h2><h3 id="查看系统中的磁盘信息"><a href="#查看系统中的磁盘信息" class="headerlink" title="查看系统中的磁盘信息"></a>查看系统中的磁盘信息</h3><ul>
+<li>使用命令<code>sudo fdisk -l </code>列出系统下磁盘及分区信息</li>
+</ul>
+<blockquote>
+<p><code>sudo fdisk -l | grep NTFS</code> 只列出特定文件的文件系统</p>
+</blockquote>
+<ul>
+<li>使用命令<code>lsblk</code>可查看系统中所有磁盘的信息，如：</li>
+</ul>
+<blockquote>
+</blockquote>
+<p><code>lsblk</code>: 列出本系统下的所有磁盘与磁盘内的分区信息<br><code>lsblk -ip /dev/device_name</code>: 设备内的所有数据的完整文件名</p>
+<ul>
+<li><p>使用命令<code>blkid </code>可列出设备的 UUID 等参数</p>
+</li>
+<li><p>使用命令<code>mount</code>可列出系统已挂载的文件系统</p>
+</li>
+</ul>
+<blockquote>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">如：</span><br><span class="line">pi@raspberrypi:&#x2F;home $ mount</span><br><span class="line">&#x2F;dev&#x2F;mmcblk0p2 on &#x2F; type ext4 (rw,noatime)</span><br><span class="line">devtmpfs on &#x2F;dev type devtmpfs (rw,relatime,size&#x3D;1827468k,nr_inodes&#x3D;97607,mode&#x3D;755)</span><br><span class="line">&#x2F;dev&#x2F;mmcblk0p1 on &#x2F;boot type vfat (rw,relatime,fmask&#x3D;0022,dmask&#x3D;0022,codepage&#x3D;437,iocharset&#x3D;ascii,shortname&#x3D;mixed,errors&#x3D;remount-ro)</span><br><span class="line">第一行：&#x2F;dev&#x2F;mmcblk0p2 为挂载的设备，挂载点为 &#x2F; 文件系统为 ext4. rw表示可读写。</span><br><span class="line">第二行：设备名称为devtmpfs，挂载在目录&#x2F;dev .....</span><br></pre></td></tr></table></figure>
+
+
+<h3 id="磁盘分区"><a href="#磁盘分区" class="headerlink" title="磁盘分区"></a>磁盘分区</h3><p>磁盘分区使用 <code>gdisk</code>/<code>fdisk</code>工具</p>
+<h3 id="磁盘格式化（创建文件系统）"><a href="#磁盘格式化（创建文件系统）" class="headerlink" title="磁盘格式化（创建文件系统）"></a>磁盘格式化（创建文件系统）</h3><p>磁盘格式化使用<code>mkfs</code>工具<br>如：<br><code>mkfs -t ext4 /dev/sdb1</code> 将设备sdb1格式化为ext4文件系统</p>
+<h3 id="磁盘挂载与卸载-mount"><a href="#磁盘挂载与卸载-mount" class="headerlink" title="磁盘挂载与卸载 mount"></a>磁盘挂载与卸载 mount</h3><p>磁盘挂载与卸载使用<code>mount </code>工具：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">[root@study ~]# mount -a</span><br><span class="line">[root@study ~]# mount [-l]</span><br><span class="line">[root@study ~]# mount [-t 文件系统] LABEL&#x3D;&#39;&#39;  挂载点</span><br><span class="line">[root@study ~]# mount [-t 文件系统] UUID&#x3D;&#39;&#39;   挂载点  # 鸟哥近期建议用这种方式喔！</span><br><span class="line">[root@study ~]# mount [-t 文件系统] 设备文件名  挂载点</span><br><span class="line">选项与参数：</span><br><span class="line">-a  ：依照配置文件 [&#x2F;etc&#x2F;fstab](..&#x2F;Text&#x2F;index.html#fstab) 的数据将所有未挂载的磁盘都挂载上来</span><br><span class="line">-l  ：单纯的输入 mount 会显示目前挂载的信息。加上 -l 可增列 Label 名称！</span><br><span class="line">-t  ：可以加上文件系统种类来指定欲挂载的类型。常见的 Linux 支持类型有：xfs, ext3, ext4,</span><br><span class="line">      reiserfs, vfat, iso9660（光盘格式）, nfs, cifs, smbfs （后三种为网络文件系统类型）</span><br><span class="line">-n  ：在默认的情况下，系统会将实际挂载的情况实时写入 &#x2F;etc&#x2F;mtab 中，以利其他程序的运行。</span><br><span class="line">      但在某些情况下（例如单人维护模式）为了避免问题会刻意不写入。此时就得要使用 -n 选项。</span><br><span class="line">-o  ：后面可以接一些挂载时额外加上的参数！比方说帐号、密码、读写权限等：</span><br><span class="line">      async, sync:   此文件系统是否使用同步写入 （sync） 或非同步 （async） 的</span><br><span class="line">                     内存机制，请参考[文件系统运行方式](..&#x2F;Text&#x2F;index.html#harddisk-filerun)。默认为 async。</span><br><span class="line">      atime,noatime: 是否修订文件的读取时间（atime）。为了性能，某些时刻可使用 noatime</span><br><span class="line">      ro, rw:        挂载文件系统成为只读（ro） 或可读写（rw）</span><br><span class="line">      auto, noauto:  允许此 filesystem 被以 mount -a 自动挂载（auto）</span><br><span class="line">      dev, nodev:    是否允许此 filesystem 上，可创建设备文件？ dev 为可允许</span><br><span class="line">      suid, nosuid:  是否允许此 filesystem 含有 suid&#x2F;sgid 的文件格式？</span><br><span class="line">      exec, noexec:  是否允许此 filesystem 上拥有可执行 binary 文件？</span><br><span class="line">      user, nouser:  是否允许此 filesystem 让任何使用者执行 mount ？一般来说，</span><br><span class="line">                     mount 仅有 root 可以进行，但下达 user 参数，则可让</span><br><span class="line">                     一般 user 也能够对此 partition 进行 mount 。</span><br><span class="line">      defaults:      默认值为：rw, suid, dev, exec, auto, nouser, and async</span><br><span class="line">      remount:       重新挂载，这在系统出错，或重新更新参数时，很有用！</span><br></pre></td></tr></table></figure>
+<p><a target="_blank" rel="noopener" href="https://wizardforcel.gitbooks.io/vbird-linux-basic-4e/content/61.html">以上mount说明粘贴自鸟哥的文章</a></p>
+<p>与mount命令相关的文件：</p>
+<p><code>/etc/fstab</code>：为自动挂载的配置文件，当运行 mount -a时，会将根据<code>/etc/fstab</code> 中配置的所有挂载点都挂上(一般是在系统启动时的脚本中调用，自己最好别用！)。</p>
+<p><code>/etc/mtab</code>，<code>/etc/mounts</code>：mount 和 umount 命令会在 <code>/etc/mtab</code> 文件中维护当前挂载的文件系统的列表。</p>
+<h4 id="查看当系统支持的文件类型"><a href="#查看当系统支持的文件类型" class="headerlink" title="查看当系统支持的文件类型"></a>查看当系统支持的文件类型</h4><p>当挂载一个当前系统不支持的文件系统类型时，它是没有办法工作的。常见的 Linux 支持类型有：xfs, ext3, ext4,<br>      reiserfs, vfat, iso9660（光盘格式）, nfs, cifs, smbfs</p>
+<ul>
+<li><p>查看Linux支持的文件系统： <code>ls -l /lib/modules/$(uname -r)/kernel/fs</code></p>
+</li>
+<li><p>查看Linux已载入到内存中的支持的文件系统：</p>
+<p><code>cat /proc/filesystems</code></p>
+<blockquote>
+<p>此命令打印的第一列说明文件系统是否需要挂载在一个块设备上， nodev 表明后面的文件系统不需要挂接在设备上。 第二列是内核支持的文件系统。</p>
+</blockquote>
+</li>
+<li><p>Linux支持的文件系统驱动文件都放在：<code>/lib/modules/$(uname -r)/kernel/fs/</code>目录下</p>
+</li>
+</ul>
+<h4 id="开始挂载"><a href="#开始挂载" class="headerlink" title="开始挂载"></a>开始挂载</h4><blockquote>
+<p>可先用<code>sudo fdisk -l</code>查看磁盘是否已经挂载，如已挂载先卸载<code>sudo umount /media/ntfs</code></p>
+</blockquote>
+<p>确保磁盘的文件系统格式是系统支持的然后开始挂载。根据<a target="_blank" rel="noopener" href="https://www.pathname.com/fhs/pub/fhs-2.3.html#MNTMOUNTPOINTFORATEMPORARILYMOUNT">Filesystem Hierarchy Standard</a> 标准, 挂载一般挂载在<code>/media</code>及<code>/mnt</code>目录下。</p>
+<ul>
+<li><p><code>/media</code>: 用来挂载可移动设备的</p>
+<blockquote>
+<p>/media : Mount point for removeable media </p>
+</blockquote>
+<p>Purpose This directory contains subdirectories which are used as mount points for removeable media such as floppy disks, cdroms and zip disks.</p>
+</li>
+<li><p><code>/mnt</code>: 临时挂载点，给管理员临时手动挂载用</p>
+<blockquote>
+</blockquote>
+<p>/mnt : Mount point for a temporarily mounted filesystem </p>
+<blockquote>
+</blockquote>
+<p>Purpose This directory is provided so that the system administrator may temporarily mount a filesystem as needed. The content of this directory is a local issue and should not affect the manner in which any program is run. This directory must not be used by installation programs: a suitable temporary directory not in use by the system must be used instead.</p>
+</li>
+</ul>
+<ol>
+<li><p>新建一个用于挂载的空目录</p>
+<blockquote>
+</blockquote>
+<p><code>mkdir -p /media/Transfer</code></p>
+<blockquote>
+<p>使用<code>-p</code>让创建者对挂载点有权限</p>
+</blockquote>
+</li>
+<li><p>将设备名将sda1挂载到<code>/media/Transfer</code>目录下：</p>
+<blockquote>
+</blockquote>
+<p><code>sudo mount /dev/sda1 /media/Transfer</code></p>
+<blockquote>
+<p>这里不同使用<code>-t</code>去指定对应设备的文件系统，是系统会使用<code>/etc/filesystems</code>中系统指定的尝试挂载文件系统类型，按优先顺序进行尝试，匹配成功的文件系统就进挂载。</p>
+<p><code>/proc/filesystems</code>中的是系统已载入的文件系统。</p>
+</blockquote>
+</li>
+<li><p>除了使用设备名还可以使用设备的UUID(比设备名更具唯一性)，进行挂载：</p>
+<blockquote>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">使用blkid找出设备或分区的UUID</span><br><span class="line">pi@raspberrypi:&#x2F;home $ sudo blkid &#x2F;dev&#x2F;sda1</span><br><span class="line">&#x2F;dev&#x2F;sda1: LABEL&#x3D;&quot;Transfer&quot; UUID&#x3D;&quot;7170-2B5B&quot; TYPE&#x3D;&quot;exfat&quot; PARTLABEL&#x3D;&quot;Basic data partition&quot; PARTUUID&#x3D;&quot;43726c47-de96-4e14-a274-97d5798293fb&quot;</span><br><span class="line">&gt;</span><br><span class="line">使用UUID进行挂载</span><br><span class="line">pi@raspberrypi:&#x2F;home $ sudo mount UUID&#x3D;&quot;7170-2B5B&quot; &#x2F;media&#x2F;Transfer</span><br><span class="line">&gt;</span><br><span class="line">pi@raspberrypi:&#x2F;home $ df &#x2F;media&#x2F;Transfer&#x2F;</span><br><span class="line">Filesystem     1K-blocks  Used Available Use% Mounted on</span><br><span class="line">&#x2F;dev&#x2F;sda1       52429824 12160  52417664   1% &#x2F;media&#x2F;Transfer</span><br><span class="line">确认挂载成功</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>其它常用的命令 </p>
+<blockquote>
+<p>以只读的方式挂载</p>
+<p><code>sudo mount -o ro /dev/sda1 /media/Transfer</code></p>
+<p>把只读的挂载重新挂载为读写模式</p>
+<p><code>sudo mount /media/Transfer -o rw,remount</code></p>
+</blockquote>
+</li>
+</ol>
+<h4 id="挂载NTFS"><a href="#挂载NTFS" class="headerlink" title="挂载NTFS"></a>挂载NTFS</h4><p>NTFS是微软开发的文件系。但微软提供了一个非商用版本的 <code>ntfs-3g</code>可读写NTFS文件系统。LInux上实现对NTFS文凭系统主要依赖<code>ntfs-3g</code>及<code>fuse</code>工具，这两个工具很有可以linux系统默认是已经安装了的</p>
+<ol>
+<li><p>安装<code>ntfs-3</code>及<code>fuse </code></p>
+<blockquote>
+<p><code>sudo apt install ntfs-3g</code></p>
+<p><code>sudo apt install fuse </code></p>
+</blockquote>
+</li>
+<li><p>将设备<code>/dev/sda2</code>挂载到目录<code>/media/ntfs</code>下</p>
+<blockquote>
+</blockquote>
+<p>pi@raspberrypi:~ $ sudo mkdir -p /media/ntfs</p>
+<blockquote>
+</blockquote>
+<p>pi@raspberrypi:~ $ sudo blkid /dev/sda2</p>
+<blockquote>
+</blockquote>
+<p>/dev/sda2: LABEL=”Data” UUID=”4F35CAF7CAA10FF7” TYPE=”ntfs” PARTLABEL=”Basic data partition” PARTUUID=”1181fbd8-3209-4e7a-be4a-0888462da65c”</p>
+<blockquote>
+<p>pi@raspberrypi:~ $ sudo mount -t ntfs UUID=”4F35CAF7CAA10FF7” /media/ntfs</p>
+<p>pi@raspberrypi:~ $ mount | grep ntfs<br>/dev/sda2 on /media/ntfs type ntfs (rw,relatime,uid=0,gid=0,fmask=0177,dmask=077,nls=utf8,errors=continue,mft_zone_multiplier=1)</p>
+</blockquote>
+</li>
+</ol>
+<h4 id="解除挂载"><a href="#解除挂载" class="headerlink" title="解除挂载"></a>解除挂载</h4><p><code>sudo umount /media/ntfs</code></p>
+<h4 id="开机自动挂载"><a href="#开机自动挂载" class="headerlink" title="开机自动挂载"></a>开机自动挂载</h4><p><code>/etc/fstab</code>：为自动挂载的配置文件，当运行 <code>mount -a</code>时，会将根据<code>/etc/fstab</code> 中配置的所有挂载点都挂上。平常不要使用<code>mount -a</code>, 但可以更改<code>/etc/fstab</code>中的配置信息，实现自动挂载。</p>
+<p>如果要将设备<code>/dev/sda2</code>中的NTFS文件系统，在开机时自动挂载到目录<code>/media/ntfs</code>下，可在<code>/etc/fstab</code>文件中增加如下的一行配置信息：</p>
+<p><code>/dev/sda2 /media/ntfs ntfs defaults 0 0</code></p>
+<p>详解：</p>
+<blockquote>
+<p>第一列：<code>/dev/sda2</code> 为实际的分区名称，也可以是卷标（Label）</p>
+<p>第二列：<code>/media/ntfs</code> 为挂载点</p>
+<p>第三列：<code>ntfs</code> 为此分区中的文件类型</p>
+<p>第四列：<code>defaults</code> 挂载的选项，用于设备挂载参数 </p>
+</blockquote>
+<pre><code>auto: 系统自动挂载，fstab默认就是这个选项
+defaults: rw, suid, dev, exec, auto, nouser, and async.
+noauto 开机不自动挂载
+nouser 只有超级用户可以挂载
+ro 按只读权限挂载
+rw 按可读可写权限挂载
+user 任何用户都可以挂载</code></pre>
+<blockquote>
+<p>第五列：<code>0</code> 当其值设置为1时，将允许dump备份程序备份；设置为0时，忽略备份操作；</p>
+<p>第六列：<code>0</code> fsck磁盘检查设置。其值是一个顺序。当其值为0时，永远不检查；而 / 根目录分区永远都为1。其它分区从2开始，数字越小越先检查，如果两个分区的数字相同，则同时检查。</p>
+</blockquote>
+<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/sparkdev/p/9015312.html">Linux mount 命令</a></p>
+<p><a target="_blank" rel="noopener" href="https://wizardforcel.gitbooks.io/vbird-linux-basic-4e/content/61.html">7.3 磁盘的分区、格式化、检验与挂载</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://stoull.github.io/2021/10/21/Linux/Linux%E6%8C%82%E8%BD%BDMount/" data-id="cl59km1340003mfj6faz4g6t3" data-title="Linux 挂载(Mount)" class="article-share-link">Share</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Mount/" rel="tag">Mount</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2022/01/04/%E5%9C%A8Mac%E4%B8%8A%E8%AF%BB%E5%86%99NTFS/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          Mac上读写NTFS
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2021/10/20/Linux/Linux%E5%91%BD%E4%BB%A4_APT_%E5%8C%85%E7%AE%A1%E7%90%86/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">高级包装工具(APT)-Advanced Packaging</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Animation/">Animation</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Animation/Core-Graphics/">Core Graphics</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Core-Graphics/">Core Graphics</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Mac/">Mac</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/vim/">vim</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/APT/" rel="tag">APT</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Animation/" rel="tag">Animation</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Color-Space/" rel="tag">Color Space</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Cron/" rel="tag">Cron</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Mac/" rel="tag">Mac</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Mount/" rel="tag">Mount</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NTFS/" rel="tag">NTFS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ps/" rel="tag">ps</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/scp/" rel="tag">scp</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ssh/" rel="tag">ssh</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vim/" rel="tag">vim</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%A2%9C%E8%89%B2/" rel="tag">颜色</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/APT/" style="font-size: 10px;">APT</a> <a href="/tags/Animation/" style="font-size: 10px;">Animation</a> <a href="/tags/Color-Space/" style="font-size: 10px;">Color Space</a> <a href="/tags/Cron/" style="font-size: 10px;">Cron</a> <a href="/tags/Linux/" style="font-size: 20px;">Linux</a> <a href="/tags/Mac/" style="font-size: 10px;">Mac</a> <a href="/tags/Mount/" style="font-size: 10px;">Mount</a> <a href="/tags/NTFS/" style="font-size: 10px;">NTFS</a> <a href="/tags/ps/" style="font-size: 10px;">ps</a> <a href="/tags/scp/" style="font-size: 10px;">scp</a> <a href="/tags/ssh/" style="font-size: 10px;">ssh</a> <a href="/tags/vim/" style="font-size: 10px;">vim</a> <a href="/tags/%E9%A2%9C%E8%89%B2/" style="font-size: 10px;">颜色</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/01/">January 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/10/">October 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/">August 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">May 2016</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2022/01/04/%E5%9C%A8Mac%E4%B8%8A%E8%AF%BB%E5%86%99NTFS/">Mac上读写NTFS</a>
+          </li>
+        
+          <li>
+            <a href="/2021/10/21/Linux/Linux%E6%8C%82%E8%BD%BDMount/">Linux 挂载(Mount)</a>
+          </li>
+        
+          <li>
+            <a href="/2021/10/20/Linux/Linux%E5%91%BD%E4%BB%A4_APT_%E5%8C%85%E7%AE%A1%E7%90%86/">高级包装工具(APT)-Advanced Packaging</a>
+          </li>
+        
+          <li>
+            <a href="/2021/10/19/Linux/Linux%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F/">Linux 文件系统</a>
+          </li>
+        
+          <li>
+            <a href="/2021/10/19/Linux/Linux%E5%91%BD%E4%BB%A4_crontab_%E8%AE%A1%E5%88%92%E4%BB%BB%E5%8A%A1/">Linux 计划任务 `Cron`</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2022 Stoull Hut<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.4.1.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>
